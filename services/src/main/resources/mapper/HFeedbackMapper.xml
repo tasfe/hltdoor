@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hltdoor.mapper.HFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.hltdoor.model.HFeedback">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="h_for" jdbcType="INTEGER" property="hFor" />
+    <result column="h_type" jdbcType="VARCHAR" property="hType" />
+    <result column="h_content" jdbcType="VARCHAR" property="hContent" />
+    <result column="h_author" jdbcType="VARCHAR" property="hAuthor" />
+    <result column="h_from" jdbcType="VARCHAR" property="hFrom" />
+    <result column="h_logo" jdbcType="VARCHAR" property="hLogo" />
+    <result column="h_by" jdbcType="VARCHAR" property="hBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, h_for, h_type, h_content, h_author, h_from, h_logo, h_by
+  </sql>
+  <select id="selectByExample" parameterType="com.hltdoor.model.HFeedbackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hltdoor.model.HFeedbackExample">
+    delete from h_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hltdoor.model.HFeedback">
+    insert into h_feedback (id, h_for, h_type, 
+      h_content, h_author, h_from, 
+      h_logo, h_by)
+    values (#{id,jdbcType=INTEGER}, #{hFor,jdbcType=INTEGER}, #{hType,jdbcType=VARCHAR}, 
+      #{hContent,jdbcType=VARCHAR}, #{hAuthor,jdbcType=VARCHAR}, #{hFrom,jdbcType=VARCHAR}, 
+      #{hLogo,jdbcType=VARCHAR}, #{hBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hltdoor.model.HFeedback">
+    insert into h_feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hFor != null">
+        h_for,
+      </if>
+      <if test="hType != null">
+        h_type,
+      </if>
+      <if test="hContent != null">
+        h_content,
+      </if>
+      <if test="hAuthor != null">
+        h_author,
+      </if>
+      <if test="hFrom != null">
+        h_from,
+      </if>
+      <if test="hLogo != null">
+        h_logo,
+      </if>
+      <if test="hBy != null">
+        h_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hFor != null">
+        #{hFor,jdbcType=INTEGER},
+      </if>
+      <if test="hType != null">
+        #{hType,jdbcType=VARCHAR},
+      </if>
+      <if test="hContent != null">
+        #{hContent,jdbcType=VARCHAR},
+      </if>
+      <if test="hAuthor != null">
+        #{hAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="hFrom != null">
+        #{hFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="hLogo != null">
+        #{hLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="hBy != null">
+        #{hBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hltdoor.model.HFeedbackExample" resultType="java.lang.Long">
+    select count(*) from h_feedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update h_feedback
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hFor != null">
+        h_for = #{record.hFor,jdbcType=INTEGER},
+      </if>
+      <if test="record.hType != null">
+        h_type = #{record.hType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hContent != null">
+        h_content = #{record.hContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hAuthor != null">
+        h_author = #{record.hAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hFrom != null">
+        h_from = #{record.hFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hLogo != null">
+        h_logo = #{record.hLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hBy != null">
+        h_by = #{record.hBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update h_feedback
+    set id = #{record.id,jdbcType=INTEGER},
+      h_for = #{record.hFor,jdbcType=INTEGER},
+      h_type = #{record.hType,jdbcType=VARCHAR},
+      h_content = #{record.hContent,jdbcType=VARCHAR},
+      h_author = #{record.hAuthor,jdbcType=VARCHAR},
+      h_from = #{record.hFrom,jdbcType=VARCHAR},
+      h_logo = #{record.hLogo,jdbcType=VARCHAR},
+      h_by = #{record.hBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+</mapper>

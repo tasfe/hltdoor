@@ -1,0 +1,108 @@
+#main-back {
+    background-image: url("../images/inside-bg.jpg");
+    padding: 15px 10px 20px 10px;
+}
+
+#menuBar {
+    display: block;
+    background: #FFFFFF;
+    border: 1px solid #e7e7eb;
+    margin: 0 20px 0 0;
+    padding: 10px;
+}
+
+.menuBox {
+    width: 100%;
+}
+
+.menuBox .menu {
+
+}
+
+.menuBox .menu .menu_title {
+    line-height: 34px;
+    color: #888888;
+    padding: 0 0 0 30px;
+}
+
+.menuBox .menu .menu_title i {
+    margin: 0 5px;
+    font-size: 20px;
+    line-height: 34px;
+}
+
+.menuBox .menu .selected a {
+    background: rgb(100, 175, 70);
+
+}
+
+.menuBox .menu .selected a:link {
+    color: #FFFFFF;
+}
+
+.menuBox .menu .selected a:visited {
+    color: #FFFFFF;
+}
+
+.menuBox .menu .selected a:hover {
+    color: #222222;
+}
+
+.menuBox .menu .menu_item {
+    line-height: 34px;
+
+}
+
+.menuBox .menu .menu_item a {
+    display: block;
+    padding: 0 0 0 58px;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #222222;
+}
+
+.menubox .menu .menu_item a:hover {
+    background: #f0f0f0;
+}
+
+.main-box {
+    padding: 0;
+    background: #FFFFFF;
+    min-height: 300px;
+    border: 1px solid #e7e7eb;
+}
+
+.main-box-title {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e7e7eb;
+}
+
+.main-box-content {
+    padding:25px;
+}
+
+.main-box-content .table-data tr td{
+    padding:0 0 0 15px;
+    line-height: 35px;
+}
+
+.float-dl dd{
+    float: left;
+    margin:5px 10px 0 0 ;
+    font-size: 12px;
+    background: #cccccc;
+    color: #FFFFFF;
+    padding:2px 5px;
+    border-radius: 10px;
+}
+
+.float-dl .selected
+{
+    background: rgb(100, 170, 70);
+}
+.float-dl .selected a{
+    color: #FFFFFF;
+}

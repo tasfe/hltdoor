@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hltdoor.mapper.HGalleryMapper">
+  <resultMap id="BaseResultMap" type="com.hltdoor.model.HGallery">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="h_title" jdbcType="VARCHAR" property="hTitle" />
+    <result column="h_sub_title" jdbcType="VARCHAR" property="hSubTitle" />
+    <result column="h_type_id" jdbcType="INTEGER" property="hTypeId" />
+    <result column="h_cover_img" jdbcType="VARCHAR" property="hCoverImg" />
+    <result column="h_vr" jdbcType="VARCHAR" property="hVr" />
+    <result column="h_building" jdbcType="VARCHAR" property="hBuilding" />
+    <result column="h_house_type" jdbcType="VARCHAR" property="hHouseType" />
+    <result column="h_house_size" jdbcType="VARCHAR" property="hHouseSize" />
+    <result column="h_house_style" jdbcType="VARCHAR" property="hHouseStyle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hltdoor.model.HGallery">
+    <result column="h_content" jdbcType="LONGVARCHAR" property="hContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, h_title, h_sub_title, h_type_id, h_cover_img, h_vr, h_building, h_house_type, 
+    h_house_size, h_house_style
+  </sql>
+  <sql id="Blob_Column_List">
+    h_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.hltdoor.model.HGalleryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from h_gallery
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.hltdoor.model.HGalleryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_gallery
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hltdoor.model.HGalleryExample">
+    delete from h_gallery
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hltdoor.model.HGallery">
+    insert into h_gallery (id, h_title, h_sub_title, 
+      h_type_id, h_cover_img, h_vr, 
+      h_building, h_house_type, h_house_size, 
+      h_house_style, h_content)
+    values (#{id,jdbcType=INTEGER}, #{hTitle,jdbcType=VARCHAR}, #{hSubTitle,jdbcType=VARCHAR}, 
+      #{hTypeId,jdbcType=INTEGER}, #{hCoverImg,jdbcType=VARCHAR}, #{hVr,jdbcType=VARCHAR}, 
+      #{hBuilding,jdbcType=VARCHAR}, #{hHouseType,jdbcType=VARCHAR}, #{hHouseSize,jdbcType=VARCHAR}, 
+      #{hHouseStyle,jdbcType=VARCHAR}, #{hContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hltdoor.model.HGallery">
+    insert into h_gallery
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hTitle != null">
+        h_title,
+      </if>
+      <if test="hSubTitle != null">
+        h_sub_title,
+      </if>
+      <if test="hTypeId != null">
+        h_type_id,
+      </if>
+      <if test="hCoverImg != null">
+        h_cover_img,
+      </if>
+      <if test="hVr != null">
+        h_vr,
+      </if>
+      <if test="hBuilding != null">
+        h_building,
+      </if>
+      <if test="hHouseType != null">
+        h_house_type,
+      </if>
+      <if test="hHouseSize != null">
+        h_house_size,
+      </if>
+      <if test="hHouseStyle != null">
+        h_house_style,
+      </if>
+      <if test="hContent != null">
+        h_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hTitle != null">
+        #{hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="hSubTitle != null">
+        #{hSubTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="hTypeId != null">
+        #{hTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="hCoverImg != null">
+        #{hCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="hVr != null">
+        #{hVr,jdbcType=VARCHAR},
+      </if>
+      <if test="hBuilding != null">
+        #{hBuilding,jdbcType=VARCHAR},
+      </if>
+      <if test="hHouseType != null">
+        #{hHouseType,jdbcType=VARCHAR},
+      </if>
+      <if test="hHouseSize != null">
+        #{hHouseSize,jdbcType=VARCHAR},
+      </if>
+      <if test="hHouseStyle != null">
+        #{hHouseStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="hContent != null">
+        #{hContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hltdoor.model.HGalleryExample" resultType="java.lang.Long">
+    select count(*) from h_gallery
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update h_gallery
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hTitle != null">
+        h_title = #{record.hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hSubTitle != null">
+        h_sub_title = #{record.hSubTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hTypeId != null">
+        h_type_id = #{record.hTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hCoverImg != null">
+        h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hVr != null">
+        h_vr = #{record.hVr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hBuilding != null">
+        h_building = #{record.hBuilding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hHouseType != null">
+        h_house_type = #{record.hHouseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hHouseSize != null">
+        h_house_size = #{record.hHouseSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hHouseStyle != null">
+        h_house_style = #{record.hHouseStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hContent != null">
+        h_content = #{record.hContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update h_gallery
+    set id = #{record.id,jdbcType=INTEGER},
+      h_title = #{record.hTitle,jdbcType=VARCHAR},
+      h_sub_title = #{record.hSubTitle,jdbcType=VARCHAR},
+      h_type_id = #{record.hTypeId,jdbcType=INTEGER},
+      h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      h_vr = #{record.hVr,jdbcType=VARCHAR},
+      h_building = #{record.hBuilding,jdbcType=VARCHAR},
+      h_house_type = #{record.hHouseType,jdbcType=VARCHAR},
+      h_house_size = #{record.hHouseSize,jdbcType=VARCHAR},
+      h_house_style = #{record.hHouseStyle,jdbcType=VARCHAR},
+      h_content = #{record.hContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update h_gallery
+    set id = #{record.id,jdbcType=INTEGER},
+      h_title = #{record.hTitle,jdbcType=VARCHAR},
+      h_sub_title = #{record.hSubTitle,jdbcType=VARCHAR},
+      h_type_id = #{record.hTypeId,jdbcType=INTEGER},
+      h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      h_vr = #{record.hVr,jdbcType=VARCHAR},
+      h_building = #{record.hBuilding,jdbcType=VARCHAR},
+      h_house_type = #{record.hHouseType,jdbcType=VARCHAR},
+      h_house_size = #{record.hHouseSize,jdbcType=VARCHAR},
+      h_house_style = #{record.hHouseStyle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

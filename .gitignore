@@ -1,0 +1,15 @@
+*.out
+*.jpg
+*.png
+*.gif
+*.tar
+*.log
+*.txt
+*.mp4
+*.war
+.DS_Store
+.idea
+*.properties
+
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="demoTest" />
+
+
+    <dubbo:registry id="myzk" protocol="zookeeper" address="127.0.0.1:2181" />
+
+    <!--<dubbo:protocol id="rest" name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"/>-->
+    <dubbo:protocol id="mydubbo" name="dubbo" host="127.0.0.1" port="20880" />
+
+    <dubbo:provider serialization="fastjson" protocol="mydubbo"/>
+    <dubbo:service interface="com.hltdoor.rpc.test.SayHelloInterface"
+                   ref="speakInterface"
+                   />
+    <bean id="speakInterface" class="com.hltdoor.rpc.impl.SayHello"/>
+
+
+    <dubbo:service interface="com.hltdoor.rpc.device.XmppService" ref="xmppService"/>
+    <bean id="xmppService" class="com.hltdoor.rpc.impl.xmpp.XmppServiceImpl"/>
+    
+    <dubbo:service interface="com.hltdoor.rpc.GalleryServiceInterface" ref="galleryService"/>
+    <dubbo:service interface="com.hltdoor.rpc.GalleryTypeServiceInterface" ref="galleryTypeService"/>
+
+    <dubbo:service interface="com.hltdoor.rpc.ProductsServiceInterface" ref="productsService"/>
+    <dubbo:service interface="com.hltdoor.rpc.ProductsTypeServiceInterface" ref="productsTypeService"/>
+    <dubbo:service interface="com.hltdoor.rpc.ProductsStyleServiceInterface" ref="productsStyleService" />
+
+    <dubbo:service interface="com.hltdoor.rpc.NewsServiceInterface" ref="newsService"/>
+    <dubbo:service interface="com.hltdoor.rpc.NewsTypeServiceInterface" ref="newsTypeService"/>
+
+    <dubbo:service interface="com.hltdoor.rpc.FeedbackServiceInterface" ref="feedbackService"/>
+
+    <dubbo:service interface="com.hltdoor.rpc.auth.UserService" ref="usersService"/>
+</beans>

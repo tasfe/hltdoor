@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hltdoor.mapper.HProductsMapper">
+  <resultMap id="BaseResultMap" type="com.hltdoor.model.HProducts">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="h_cover_img" jdbcType="VARCHAR" property="hCoverImg" />
+    <result column="h_title" jdbcType="VARCHAR" property="hTitle" />
+    <result column="h_guige" jdbcType="VARCHAR" property="hGuige" />
+    <result column="h_price" jdbcType="VARCHAR" property="hPrice" />
+    <result column="h_type" jdbcType="INTEGER" property="hType" />
+    <result column="h_style" jdbcType="INTEGER" property="hStyle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hltdoor.model.HProducts">
+    <result column="h_content" jdbcType="LONGVARCHAR" property="hContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, h_cover_img, h_title, h_guige, h_price, h_type, h_style
+  </sql>
+  <sql id="Blob_Column_List">
+    h_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.hltdoor.model.HProductsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from h_products
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.hltdoor.model.HProductsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_products
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hltdoor.model.HProductsExample">
+    delete from h_products
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hltdoor.model.HProducts">
+    insert into h_products (id, h_cover_img, h_title, 
+      h_guige, h_price, h_type, 
+      h_style, h_content)
+    values (#{id,jdbcType=INTEGER}, #{hCoverImg,jdbcType=VARCHAR}, #{hTitle,jdbcType=VARCHAR}, 
+      #{hGuige,jdbcType=VARCHAR}, #{hPrice,jdbcType=VARCHAR}, #{hType,jdbcType=INTEGER}, 
+      #{hStyle,jdbcType=INTEGER}, #{hContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hltdoor.model.HProducts">
+    insert into h_products
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hCoverImg != null">
+        h_cover_img,
+      </if>
+      <if test="hTitle != null">
+        h_title,
+      </if>
+      <if test="hGuige != null">
+        h_guige,
+      </if>
+      <if test="hPrice != null">
+        h_price,
+      </if>
+      <if test="hType != null">
+        h_type,
+      </if>
+      <if test="hStyle != null">
+        h_style,
+      </if>
+      <if test="hContent != null">
+        h_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hCoverImg != null">
+        #{hCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="hTitle != null">
+        #{hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="hGuige != null">
+        #{hGuige,jdbcType=VARCHAR},
+      </if>
+      <if test="hPrice != null">
+        #{hPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="hType != null">
+        #{hType,jdbcType=INTEGER},
+      </if>
+      <if test="hStyle != null">
+        #{hStyle,jdbcType=INTEGER},
+      </if>
+      <if test="hContent != null">
+        #{hContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hltdoor.model.HProductsExample" resultType="java.lang.Long">
+    select count(*) from h_products
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update h_products
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hCoverImg != null">
+        h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hTitle != null">
+        h_title = #{record.hTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hGuige != null">
+        h_guige = #{record.hGuige,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hPrice != null">
+        h_price = #{record.hPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hType != null">
+        h_type = #{record.hType,jdbcType=INTEGER},
+      </if>
+      <if test="record.hStyle != null">
+        h_style = #{record.hStyle,jdbcType=INTEGER},
+      </if>
+      <if test="record.hContent != null">
+        h_content = #{record.hContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update h_products
+    set id = #{record.id,jdbcType=INTEGER},
+      h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      h_title = #{record.hTitle,jdbcType=VARCHAR},
+      h_guige = #{record.hGuige,jdbcType=VARCHAR},
+      h_price = #{record.hPrice,jdbcType=VARCHAR},
+      h_type = #{record.hType,jdbcType=INTEGER},
+      h_style = #{record.hStyle,jdbcType=INTEGER},
+      h_content = #{record.hContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update h_products
+    set id = #{record.id,jdbcType=INTEGER},
+      h_cover_img = #{record.hCoverImg,jdbcType=VARCHAR},
+      h_title = #{record.hTitle,jdbcType=VARCHAR},
+      h_guige = #{record.hGuige,jdbcType=VARCHAR},
+      h_price = #{record.hPrice,jdbcType=VARCHAR},
+      h_type = #{record.hType,jdbcType=INTEGER},
+      h_style = #{record.hStyle,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
